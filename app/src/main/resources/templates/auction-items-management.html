@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<a th:href="@{auction-items-management}"></a>
+<header sec:authorize="hasAuthority('ADMIN')" th:replace="admin-menu :: header"/>
+<div class="container">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Auction Items</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Property Name</th>
+                    <th scope="col">Upset price</th>
+                    <th scope="col">Deposit</th>
+                    <th scope="col">Min Bid Increment</th>
+                    <th scope="col">Start Bidding</th>
+                    <th scope="col">End Bidding</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="auctionItemRow: ${auctionItemRows}">
+                    <td th:text="${auctionItemRow.propertyName}"></td>
+                    <td th:text="${auctionItemRow.upsetPrice}"></td>
+                    <td th:text="${auctionItemRow.deposit}">
+                    </td>
+                    <td th:text="${auctionItemRow.minBidIncrement}"></td>
+                    <td th:text="${auctionItemRow.startBidding}"></td>
+                    <td th:text="${auctionItemRow.endBidding}"></td>
+                    <td th:text="${auctionItemRow.status}"></td>
+
+                    <td th:if="${auctionItemRow.status == 'IN_PROGRESS'}">
+                        <a th:href="@{/end(id=${auctionItemRow.id})}">
+                            <button type="button" class="btn btn-outline-primary btn-sm mr-3">End</button>
+                        </a>
+                    </td>
+                    <td th:if="${auctionItemRow.status == 'NOT_STARTED'}">
+                        <a th:href="@{/start(id=${auctionItemRow.id})}">
+                            <button type="button" class="btn btn-outline-primary btn-sm mr-3">Start</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card border border-info border-3 mt-3">
+        <div class="card-header bg-info">
+            <h3>Create Auction Item</h3>
+        </div>
+        <div class="card-body bg-light">
+            <form th:action="@{/auction-items-management}" th:object="${auctionItemModel}" method="post">
+                <div class="form-group row">
+                    <label for="propertyName" class="col-form-label col-sm-4">Property</label>
+                    <select class="form-control col-sm-8" id="propertyName" th:field="*{propertyName}">
+                        <option value="" id="0" disabled="true" selected="true">---Please select---</option>
+                        <option value="" th:each=" prop : ${propertiesWithoutAuctionItem}"
+                                th:value="${prop.name}"
+                                th:text="${prop.name}">
+                    </select>
+                    <span class="text-danger" th:if="${#fields.hasErrors('propertyName')}"
+                          th:errors="*{propertyName}">Property Name Error</span>
+                </div>
+                <div class="form-group row">
+                    <label for="upsetPrice" class="col-form-label col-sm-4">Upset price</label>
+                    <input type="number" th:field="*{upsetPrice}" class="form-control col-sm-8" id="upsetPrice">
+                    <span class="text-danger" th:if="${#fields.hasErrors('upsetPrice')}"
+                          th:errors="*{upsetPrice}">Upset Price Error</span>
+                </div>
+                <div class="form-group row">
+                    <label for="deposit" class="col-form-label col-sm-4">Deposit</label>
+                    <input type="number" th:field="*{deposit}" class="form-control col-sm-8" id="deposit">
+                    <span class="text-danger" th:if="${#fields.hasErrors('deposit')}"
+                          th:errors="*{deposit}">Deposit Error</span>
+                </div>
+
+                <div class="form-group row">
+                    <label for="minBidIncrement" class="col-form-label col-sm-4">Minimum Bid Increment</label>
+                    <input type="number" th:field="*{minBidIncrement}" class="form-control col-sm-8" id="minBidIncrement">
+                    <span class="text-danger" th:if="${#fields.hasErrors('minBidIncrement')}"
+                          th:errors="*{minBidIncrement}">Min Bid Increment Error></span>
+                </div>
+
+                <div class="form-group row">
+                    <label for="startBidding" class="col-form-label col-sm-4">Start Bidding</label>
+                    <input type="datetime-local" th:field="*{startBidding}"  class="form-control col-sm-8" id="startBidding">
+                    <span class="text-danger" th:if="${#fields.hasErrors('startBidding')}"
+                          th:errors="*{startBidding}">Start Bidding Error></span>
+                </div>
+
+                <div class="form-group row">
+                    <label for="endBidding" class="col-form-label col-sm-4">End Bidding</label>
+                    <input type="datetime-local" th:field="*{endBidding}" class="form-control col-sm-8" id="endBidding">
+                    <span class="text-danger" th:if="${#fields.hasErrors('endBidding')}"
+                          th:errors="*{endBidding}">End Bidding Error></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

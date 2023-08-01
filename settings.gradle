@@ -1,0 +1,5 @@
+rootProject.name = 'auction-phase-1'
+include 'app'
+include 'service'
+include 'domain'
+include 'persistence'

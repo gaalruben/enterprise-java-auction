@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<a th:href="@{index}"></a>
+<header sec:authorize="hasAuthority('ADMIN')" th:replace="admin-menu :: header"/>
+<header sec:authorize="hasAuthority('USER')" th:replace="user-menu :: header"/>
+
+<div class="container">
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>User details</h3>
+        </div>
+        <div class="card-body bg-light">
+            <dl class="row">
+                <dt class="col-sm-4">Full Name</dt>
+                <dd class="col-sm-8" th:text="${userDetails.fullName}"></dd>
+
+                <dt class="col-sm-4">Role</dt>
+                <dd class="col-sm-8" th:text="${userDetails.role}"></dd>
+
+                <dt class="col-sm-4">Balance</dt>
+                <dd class="col-sm-8" th:text="${userDetails.balance}"></dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Statistics</h3>
+        </div>
+        <div class="card-body bg-light">
+            <dl class="row">
+                <dt class="col-sm-4">Number of All Auction Items</dt>
+                <dd class="col-sm-8" th:text="${statistics.numberOfAllAuctionItems}"></dd>
+
+                <dt class="col-sm-4">Finished</dt>
+                <dd class="col-sm-8" th:text="${statistics.finished}"></dd>
+
+                <dt class="col-sm-4">In progress</dt>
+                <dd class="col-sm-8" th:text="${statistics.inProgress}"></dd>
+
+                <dt class="col-sm-4">Not started </dt>
+                <dd class="col-sm-8" th:text="${statistics.notStarted}"></dd>
+
+                <dt class="col-sm-4">Number of Users</dt>
+                <dd class="col-sm-8" th:text="${statistics.numberOfUsers}"></dd>
+            </dl>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

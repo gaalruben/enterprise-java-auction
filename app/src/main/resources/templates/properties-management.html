@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<a th:href="@{properties-management}"></a>
+<header sec:authorize="hasAuthority('ADMIN')" th:replace="admin-menu :: header"/>
+<div class="container">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Personal Properties</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Owner Name</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Size width</th>
+                    <th scope="col">Size height</th>
+                    <th scope="col">Size depth</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="personalPropertyRow: ${personalPropertyRows}">
+                    <td th:text="${personalPropertyRow.name}"></td>
+                    <td th:text="${personalPropertyRow.category}"></td>
+                    <td th:text="${personalPropertyRow.description}">
+                    </td>
+                    <td th:text="${personalPropertyRow.ownerName}"></td>
+                    <td th:text="${personalPropertyRow.weight}"></td>
+                    <td th:text="${personalPropertyRow.sizeWidth}"></td>
+                    <td th:text="${personalPropertyRow.sizeHeight}"></td>
+                    <td th:text="${personalPropertyRow.sizeDepth}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card border border-info border-3 mt-3">
+        <div class="card-header bg-info">
+            <h3>Real Properties</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Owner Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Area Size</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <tr th:each="realPropertyRow: ${realPropertyRows}">
+                    <td th:text="${realPropertyRow.name}"></td>
+                    <td th:text="${realPropertyRow.category}"></td>
+                    <td th:text="${realPropertyRow.description}">
+                    </td>
+                    <td th:text="${realPropertyRow.ownerName}"></td>
+                    <td th:text="${realPropertyRow.location}"></td>
+                    <td th:text="${realPropertyRow.areaSize}"></td>
+                </tr>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card border border-info border-3 mt-3 mb-3">
+        <div class="card-header bg-info">
+            <h3>Create Property</h3>
+        </div>
+
+        <div class="card-body bg-light">
+
+            <form th:action="@{/properties-management}" th:object="${propertyModel}" method="post">
+                <!-- Begin: Common Property fields -->
+                <div class="form-group row">
+                    <label for="name" class="col-form-label col-sm-4">Name</label>
+                    <input th:field="*{name}" type="text" class="form-control col-sm-8" id="name">
+
+                    <span class="text-danger" th:if="${#fields.hasErrors('name')}"
+                          th:errors="*{name}">Name Error</span>
+                </div>
+                <div class="form-group row">
+                    <label for="category" class="col-form-label col-sm-4">Category</label>
+                    <select th:field="*{category}" class="form-select form-control col-sm-8" id="category">
+                        <option th:value="NONE" disabled value="NONE">Select a category</option>
+                        <option th:value="ART" selected value="ART">ART</option>
+                        <option th:value="JEWELLERY" value="JEWELLERY">JEWELLERY</option>
+                        <option th:value="ANTIQUITIES" value="ANTIQUITIES">ANTIQUITIES</option>
+                        <option th:value="TECHNOLOGY" value="TECHNOLOGY">TECHNOLOGY</option>
+                        <option th:value="LAND" value="LAND">LAND</option>
+                        <option th:value="HOUSE" value="HOUSE">HOUSE</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label for="description" class="col-form-label col-sm-4">Description</label>
+                    <textarea th:field="*{description}" class="form-control col-sm-8" id="description"></textarea>
+                    <span class="text-danger" th:if="${#fields.hasErrors('description')}"
+                          th:errors="*{description}">Description Error</span>
+                </div>
+                <div class="form-group row">
+                    <label for="ownerName" class="col-form-label col-sm-4">Owner Name</label>
+                    <input th:field="*{ownerName}" type="text" class="form-control col-sm-8" id="ownerName">
+                    <span class="text-danger" th:if="${#fields.hasErrors('ownerName')}"
+                          th:errors="*{ownerName}">Owner Name Error</span>
+                </div>
+                <!-- End: Common Property fields -->
+
+                <!-- Property Sub-type (personal- or real-property) selector -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                            <button  class="nav-link active" id="personalPropertyTab" data-toggle="tab"
+                                     data-target="#personalProperty" type="button"
+                                     role="tab" aria-controls="home" aria-selected="true">Personal Property
+                            </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="realPropertyTab" data-toggle="tab" data-target="#realProperty"
+                                    type="button"
+                                    role="tab" aria-controls="profile" aria-selected="false">Real Property
+                            </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content border-3 mt-3 mx-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="personalProperty" role="tabpanel"
+                         aria-labelledby="home-tab">
+                        <!-- Begin: Personal Property fields -->
+                        <div class="form-group row">
+                            <label for="weight" class="col-form-label col-sm-4">Weight (g)</label>
+                            <input th:field="*{weight}" type="number" class="form-control col-sm-8" id="weight">
+                            <p class="text-danger" th:if="${#fields.hasErrors('personalPropertyValid')}">Weight Error</p>
+                        </div>
+                        <div class="form-group row">
+                            <label for="width" class="col-form-label col-sm-4">Size Width (cm)</label>
+                            <input th:field="*{sizeWidth}" type="number" class="form-control col-sm-8" id="width">
+                        </div>
+                        <div class="form-group row">
+                            <label for="height" class="col-form-label col-sm-4">Size Height (cm)</label>
+                            <input th:field="*{sizeHeight}" type="number" class="form-control col-sm-8" id="height">
+                        </div>
+                        <div class="form-group row">
+                            <label for="weight" class="col-form-label col-sm-4">Size Depth (cm)</label>
+                            <input th:field="*{sizeDepth}" type="number" class="form-control col-sm-8" id="depth">
+                        </div>
+                        <!-- End: Personal Property fields -->
+                    </div>
+                    <div class="tab-pane fade" id="realProperty" role="tabpanel" aria-labelledby="profile-tab">
+                        <!-- Begin: Real Property fields -->
+                        <div class="form-group row">
+                            <label for="location" class="col-form-label col-sm-4">Location</label>
+                            <input th:field="*{location}" type="text" class="form-control col-sm-8" id="location">
+                        </div>
+                        <div class="form-group row">
+                            <label for="areaSize" class="col-form-label col-sm-4">Area Size (nm)</label>
+                            <input th:field="*{areaSize}" type="text" class="form-control col-sm-8" id="areaSize">
+                        </div>
+                        <!-- End: Real Property fields -->
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<html>
+<head>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Auction Items</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Property Name</th>
+                    <th scope="col">Upset price</th>
+                    <th scope="col">Deposit</th>
+                    <th scope="col">Min Bid Increment</th>
+                    <th scope="col">Start Bidding</th>
+                    <th scope="col">End Bidding</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Huszti Zoltán nagyfestő hitvalló, Betlehem Csillagai</td>
+                    <td>100000</td>
+                    <td>25000</td>
+                    <td>10000</td>
+                    <td>2023.02.15. 8:00</td>
+                    <td>2023.02.15. 22:00</td>
+                    <td>NOT_STARTED</td>
+                    <td><button type="button" class="btn btn-outline-primary btn-sm mr-3">Start</button></td>
+                </tr>
+                <tr>
+                    <td>Vizsolyi Biblia</td>
+                    <td>10000</td>
+                    <td>0</td>
+                    <td>1000</td>
+                    <td>2023.03.20. 8:00</td>
+                    <td>2023.03.21. 20:00</td>
+                    <td>IN_PROGRESS</td>
+                    <td><button type="button" class="btn btn-outline-primary btn-sm mr-3">End</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card border border-info border-3 mt-3">
+        <div class="card-header bg-info">
+            <h3>Create Auction Item</h3>
+        </div>
+        <div class="card-body bg-light">
+            <form>
+                <div class="form-group row">
+                    <label for="category" class="col-form-label col-sm-4">Property</label>
+                    <select class="form-control col-sm-8" id="category">
+                        <option id="0" disabled="true" selected="true">---Please select---</option>
+                        <option id="2">Commodore 64</option>
+                        <option id="3">2 szobás panel lakás a József Attila lakótelepen</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label for="country" class="col-form-label col-sm-4">Upset price</label>
+                    <input type="number" class="form-control col-sm-8" id="country">
+                </div>
+                <div class="form-group row">
+                    <label for="deposit" class="col-form-label col-sm-4">Deposit</label>
+                    <input type="number" class="form-control col-sm-8" id="deposit">
+                </div>
+
+                <div class="form-group row">
+                    <label for="minBidIncrement" class="col-form-label col-sm-4">Minimum Bid Increment</label>
+                    <input type="number" class="form-control col-sm-8" id="minBidIncrement">
+                </div>
+
+                <div class="form-group row">
+                    <label for="startBidding" class="col-form-label col-sm-4">Start Bidding</label>
+                    <input type="datetime-local" class="form-control col-sm-8" id="startBidding">
+                </div>
+
+                <div class="form-group row">
+                    <label for="endBidding" class="col-form-label col-sm-4">End Bidding</label>
+                    <input type="datetime-local" class="form-control col-sm-8" id="endBidding">
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

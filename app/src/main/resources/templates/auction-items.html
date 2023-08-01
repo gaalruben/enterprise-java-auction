@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<a th:href="@{auction-items}"></a>
+<header sec:authorize="hasAuthority('USER')" th:replace="user-menu :: header"/>
+<div class="container">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Auction Items</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Property Name</th>
+                    <th scope="col">Upset price</th>
+                    <th scope="col">Deposit</th>
+                    <th scope="col">Min Bid Increment</th>
+                    <th scope="col">Start Bidding</th>
+                    <th scope="col">End Bidding</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="auctionItemRow: ${auctionItemRows}">
+                    <td th:text="${auctionItemRow.propertyName}"></td>
+                    <td th:text="${auctionItemRow.upsetPrice}"></td>
+                    <td th:text="${auctionItemRow.deposit}">
+                    </td>
+                    <td th:text="${auctionItemRow.minBidIncrement}"></td>
+                    <td th:text="${auctionItemRow.startBidding}"></td>
+                    <td th:text="${auctionItemRow.endBidding}"></td>
+                    <td th:text="${auctionItemRow.status}"></td>
+
+                    <td th:if="${auctionItemRow.status == 'IN_PROGRESS'} AND ${auctionItemRow.userIsInParticipants == false}">
+                        <a th:href="@{/join(id=${auctionItemRow.id})}">
+                            <button type="button" class="btn btn-outline-primary btn-sm mr-3">Join</button>
+                        </a>
+                    </td>
+                    <td th:if="${auctionItemRow.status == 'IN_PROGRESS'} AND ${auctionItemRow.userIsInParticipants}">
+                        <a th:href="@{bidding}">
+                            <button type="button" class="btn btn-outline-primary btn-sm mr-3">Bidding</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

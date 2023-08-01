@@ -1,0 +1,23 @@
+[
+  {
+    "id": 200,
+    "fullName": "Sándor Nagy",
+    "role": "ADMIN",
+    "credentials": {
+      "username": "snagy",
+      "password": "sn-secret"
+    }
+  },
+  {
+    "id": 201,
+    "fullName": "Péter Kovács",
+    "role": "USER",
+    "credentials": {
+      "username": "pkovacs",
+      "password": "pk-secret"
+    },
+    "account": {
+      "balance": 150000
+    }
+  }
+]

@@ -1,0 +1,180 @@
+<html>
+<head>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Personal Properties</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Owner Name</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Size width</th>
+                    <th scope="col">Size height</th>
+                    <th scope="col">Size depth</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Huszti Zoltán nagyfestő hitvalló, Betlehem Csillagai</td>
+                    <td>ART</td>
+                    <td>Huszti Zoltán kortárs pap festőművész festménye. Vászonra festve. Absztrakt, Expresszionista
+                        stílusú.
+                    </td>
+                    <td>Dóra Selmeciné Szalay</td>
+                    <td>4000 g</td>
+                    <td>80 cm</td>
+                    <td>120 cm</td>
+                    <td>4 cm</td>
+                </tr>
+                <tr>
+                    <td>Commodore 64</td>
+                    <td>TECHNOLOGY</td>
+                    <td>1991-ben gyártott működőképes Commodore 64 számítógép</td>
+                    <td>Boldizsár Szepesi</td>
+                    <td>1200 g</td>
+                    <td>40 cm</td>
+                    <td>8 cm</td>
+                    <td>22 cm</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card border border-info border-3 mt-3">
+        <div class="card-header bg-info">
+            <h3>Real Properties</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Owner Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Area Size</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2 szobás panel lakás a József Attila lakótelepen</td>
+                    <td>APARTMAN</td>
+                    <td>Jó állapotú, 66 nm-es 2 szobás panel lakás a József Attila lakótelepen</td>
+                    <td>Kovács Árpád</td>
+                    <td>Budapest, IX. kerület, Pöttyös utca 171</td>
+                    <td>66 nm</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card border border-info border-3 mt-3 mb-3">
+        <div class="card-header bg-info">
+            <h3>Create Property</h3>
+        </div>
+
+        <div class="card-body bg-light">
+
+            <form>
+                <!-- Begin: Common Property fields -->
+                <div class="form-group row">
+                    <label for="name" class="col-form-label col-sm-4">Name</label>
+                    <input type="text" class="form-control col-sm-8" id="name">
+                </div>
+                <div class="form-group row">
+                    <label for="category" class="col-form-label col-sm-4">Category</label>
+                    <select class="form-select form-control col-sm-8" id="category">
+                        <option disabled value="NONE">Select a category</option>
+                        <option selected value="ART">ART</option>
+                        <option value="JEWELLERY">JEWELLERY</option>
+                        <option value="ANTIQUITIES">ANTIQUITIES</option>
+                        <option value="TECHNOLOGY">TECHNOLOGY</option>
+                        <option value="LAND">LAND</option>
+                        <option value="HOUSE">HOUSE</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label for="description" class="col-form-label col-sm-4">Description</label>
+                    <textarea class="form-control col-sm-8" id="description"></textarea>
+                </div>
+                <div class="form-group row">
+                    <label for="ownerName" class="col-form-label col-sm-4">Owner Name</label>
+                    <input type="text" class="form-control col-sm-8" id="ownerName">
+                </div>
+                <!-- End: Common Property fields -->
+
+                <!-- Property Sub-type (personal- or real-property) selector -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="personalPropertyTab" data-toggle="tab"
+                                data-target="#personalProperty" type="button"
+                                role="tab" aria-controls="home" aria-selected="true">Personal Property
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="realPropertyTab" data-toggle="tab" data-target="#realProperty"
+                                type="button"
+                                role="tab" aria-controls="profile" aria-selected="false">Real Property
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content border-3 mt-3 mx-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="personalProperty" role="tabpanel"
+                         aria-labelledby="home-tab">
+                        <!-- Begin: Personal Property fields -->
+                        <div class="form-group row">
+                            <label for="weight" class="col-form-label col-sm-4">Weight (g)</label>
+                            <input type="number" class="form-control col-sm-8" id="weight">
+                        </div>
+                        <div class="form-group row">
+                            <label for="width" class="col-form-label col-sm-4">Size Width (cm)</label>
+                            <input type="number" class="form-control col-sm-8" id="width">
+                        </div>
+                        <div class="form-group row">
+                            <label for="height" class="col-form-label col-sm-4">Size Height (cm)</label>
+                            <input type="number" class="form-control col-sm-8" id="height">
+                        </div>
+                        <div class="form-group row">
+                            <label for="weight" class="col-form-label col-sm-4">Size Depth (cm)</label>
+                            <input type="number" class="form-control col-sm-8" id="depth">
+                        </div>
+                        <!-- End: Personal Property fields -->
+                    </div>
+                    <div class="tab-pane fade" id="realProperty" role="tabpanel" aria-labelledby="profile-tab">
+                        <!-- Begin: Real Property fields -->
+                        <div class="form-group row">
+                            <label for="location" class="col-form-label col-sm-4">Location</label>
+                            <input type="text" class="form-control col-sm-8" id="location">
+                        </div>
+                        <div class="form-group row">
+                            <label for="areaSize" class="col-form-label col-sm-4">Area Size (nm)</label>
+                            <input type="text" class="form-control col-sm-8" id="areaSize">
+                        </div>
+                        <!-- End: Real Property fields -->
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

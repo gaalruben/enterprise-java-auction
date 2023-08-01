@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "name": "Huszti Zoltán nagyfestő hitvalló, Betlehem Csillagai",
+    "description": "Huszti Zoltán kortárs pap festőművész festménye. Vászonra festve. Absztrakt, Expresszionista stílusú.",
+    "category": "ART",
+    "ownerName": "Dóra Selmeciné Szalay",
+    "weight": 4000,
+    "size": {
+      "width": 80,
+      "height": 120,
+      "depth": 4
+    }
+  },
+  {
+    "id": 2,
+    "name": "Commodore 64",
+    "description": "1991-ben gyártott működőképes Commodore 64 számítógép",
+    "category": "TECHNOLOGY",
+    "ownerName": "Boldizsár Szepesi",
+    "weight": 1200,
+    "size": {
+      "width": 40,
+      "height": 8,
+      "depth": 22
+    }
+  },
+  {
+    "id": 3,
+    "name": "Vizsolyi Biblia",
+    "description": "Károly Gáspár által fordított, 1590-ben nyomtatott Biblia másolata",
+    "category": "ANTIQUITIES",
+    "ownerName": "Zsolt Török",
+    "weight": 6000,
+    "size": {
+      "width": 30,
+      "height": 20,
+      "depth": 15
+    }
+  }
+]

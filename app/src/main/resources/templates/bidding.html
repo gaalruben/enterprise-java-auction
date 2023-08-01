@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<a th:href="@{bidding}"></a>
+<header sec:authorize="hasAuthority('USER')" th:replace="user-menu :: header"/>
+<div class="container">
+
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h3>Bidding</h3>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Property Name</th>
+                    <th scope="col">Property Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Upset price</th>
+                    <th scope="col">Deposit</th>
+                    <th scope="col">Min Bid Increment</th>
+                    <th scope="col">Start Bidding</th>
+                    <th scope="col">End Bidding</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Last Bidding</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${biddingDTO.propertyName}"></td>
+                    <td th:text="${biddingDTO.propertyDescription}"></td>
+                    <td th:text="${biddingDTO.price}"></td>
+                    <td th:text="${biddingDTO.upsetPrice}"></td>
+                    <td th:text="${biddingDTO.deposit}"></td>
+                    <td th:text="${biddingDTO.minBidIncrement}"></td>
+                    <td th:text="${biddingDTO.startBidding}"></td>
+                    <td th:text="${biddingDTO.endBidding}"></td>
+                    <td th:text="${biddingDTO.status}"></td>
+                    <td th:text="${biddingDTO.lastBidding}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card border border-info border-3 mt-3">
+        <div class="card-header bg-info">
+            <h3>Bid</h3>
+        </div>
+        <div th:if="${biddingDTO.propertyName != ''}" class="card-body bg-light">
+            <form th:action="@{/bid}" th:object="${auctionItemModel}" method="post">
+                <div class="form-group row">
+                    <label for="price" class="col-form-label col-sm-4">Price</label>
+                    <input type="number" th:name="price" class="form-control col-sm-8" id="price">
+                    <div th:if="${priceError != ''}">
+                        <p style="color: red" th:text="${priceError}" class="error" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Bid</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

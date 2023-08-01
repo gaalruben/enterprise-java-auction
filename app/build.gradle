@@ -1,0 +1,15 @@
+plugins {
+    id 'application'
+}
+application {
+    mainClass = 'org.learning.auction.SpringApplication'
+}
+dependencies {
+    implementation project(':service')
+    implementation project(':domain')
+    implementation project(':persistence')
+    runtimeOnly 'com.h2database:h2'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+}

@@ -1,0 +1,13 @@
+dependencies {
+    implementation project(':domain')
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation("com.google.guava:guava:31.1-jre")
+}
+
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = false
+}
